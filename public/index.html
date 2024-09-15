@@ -36,7 +36,12 @@
     </script>
 </head>
 
-<body class="bg-black">
+<body class="bg-black" x-data="{'showPeppoAviao':false,'timeoutPeppoAviao':null}">
+    <div class="w-full absolute translate-y-1/3 z-50" x-cloak x-show="showPeppoAviao"
+        x-transition:enter.opacity.duration.1000ms x-transition:leave.opacity.duration.1500ms>
+        <img src="./imagens/peppoaviao.webp" alt="" class="mx-auto scale-y-75 w-full">
+    </div>
+
     <div class="h-screen flex flex-col justify-between">
         <div class="grow flex items-center">
             <div class="w-full">
@@ -44,31 +49,36 @@
                     Air Pix Funny 61&trade;
                 </h1>
 
-                <div class="bg-white py-6 w-full lg:w-1/3 sm:w-1/2 mx-auto" x-data="{onCountdown: true}"
+                <div class="bg-white py-6 w-full  2xl:w-1/4 sm:w-1/2 mx-auto" x-data="{onCountdown: true}"
                     x-on:tooglecountdown.window="onCountdown = $event.detail.status;">
                     <div x-show="onCountdown" x-cloak>
 
-                        <div class="relative flex justify-between items-center mb-6 px-3 gap-3"
+                        <div class="flex justify-between mb-3 gap-3 xl:gap-6"
                             x-data="{clicked: false, dialogeShow: false}">
-                            <div class="grow flex justify-center">
-                                <img src="./imagens/pilot.webp" alt="pilot" class="cursor-pointer"
-                                    :class="clicked ? 'animate-pendule' : 'animate-bounce'"
-                                    x-on:click="clicked = true; dialogeShow = true">
+
+                            <div class="flex-1 flex justify-end">
+                                <img src="./imagens/pilot.webp" alt="pilot" class="cursor-pointer w-36 h-36"
+                                    :class="clicked ? 'animate-pendule' : 'animate-bounce'" x-on:click="function(){
+                                        clicked = true; dialogeShow = true
+                                    }">
                             </div>
 
-                            <div class="font-bold text-gray-300 grow" :class="dialogeShow && 'opacity-0'">
-                                &lt;- (click me)
+                            <div class="flex-1 relative overflow-clip pe-6">
+                                <div class="font-bold text-gray-300 absolute top-1/3 right-1/2 text-nowrap"
+                                    :class="dialogeShow && 'opacity-0'">
+                                    &lt;- (click me)
+                                </div>
+
+                                <div class="bg-yellow-300 p-3 border border-yellow-500 w-full text-sm lg:text-base xl:text-lg"
+                                    :class="!dialogeShow && 'opacity-0'">
+                                    E aí, sou o piloto do <strong><i>MeiaTimerInfinite-8</i></strong>. A dinâmica
+                                    simples: durante o voo, <strong>quanto mais risadinha enviar, mais alto o nosso
+                                        avião sobe</strong>.
+                                    Vamos
+                                    juntos nessa viagem engraçada?
+                                </div>
                             </div>
 
-                            <div x-show="dialogeShow" x-cloak
-                                class="bg-yellow-300 p-3 border border-yellow-500 w-48 absolute right-3 top-1 xl:w-56 xl:text-lg 2xl:right-24 lg:right-5 sm:right-6">
-                                E aí, sou o piloto. Junte-se a nós no voo engraçado do avião
-                                <strong><i>MeiaTimerInfinite-8</i></strong> e vamos fazer ele decolar tão alto como
-                                nunca
-                                visto
-                                antes!
-                                ehehe
-                            </div>
                         </div>
 
                         <div class="w-full mb-6">
@@ -89,17 +99,11 @@
 
                         <hr class="w-24 mx-auto mb-6">
 
-                        <div class="flex justify-around items-center px-3">
-                            <div class="mx-auto w-48 text-center font-bold">
-                                <a href="https://pixie.gg/meiaum" class="text-blue-500 underline link text-wrap">Garanta
-                                    aqui o
-                                    seu
-                                    lugar</a>
-                            </div>
-
-                            <div class="mx-auto w-48 font-bold" x-data="{copied:false,timeout:null}">
-                                <div class="cursor-pointer bg-black text-white w-fit p-2 text-center mx-auto"
-                                    x-on:click="function() {
+                        <div class="flex justify-center items-center px-3">
+                            <div class="mx-auto w-48 font-bold" x-data="{copied:false,timeout:null,clicked:false}">
+                                <div class="cursor-pointer bg-black text-white w-fit p-2 text-center mx-auto shadow-xl"
+                                    :class="!clicked && 'animate-pendule'" x-on:click="function() {
+                                    clicked = true;
                                 clearTimeout(timeout); copied = true; timeout = setTimeout(() => { copied = false }, 2000);
                                 navigator.clipboard.writeText('Ei, tá afim de fazer um voo engraçado? Venha voar na Air Pix Funny 61 TM e decole tão alto como nunca visto antes. Faltam menos de ' + document.getElementById('countdown').textContent + ' para o próximo voo. Para mais informações: ' + window.location.href)
                             }" role="button">
@@ -114,34 +118,58 @@
                     </div>
 
                     <div x-show="!onCountdown" x-cloak>
-                        <div class="relative flex justify-between items-center mb-12 px-3"
+
+                        <div class="flex justify-between mb-6 gap-3 xl:gap-6"
                             x-data="{clicked: false, dialogeShow: false}">
-                            <div class="grow flex justify-center">
-                                <img src="./imagens/sitpilot.webp" alt="pilot" class="cursor-pointer ms-3"
-                                    :class="clicked ? 'animate-pendule' : 'animate-bounce'"
-                                    x-on:click="clicked = true; dialogeShow = true">
+
+                            <div class="flex-1 flex justify-end">
+                                <img src="./imagens/sitpilot.webp" alt="pilot" class="cursor-pointer w-36 h-36"
+                                    :class="{'animate-pendule': clicked, 'animate-bounce': !clicked}"
+                                    x-show="!showPeppoAviao" x-transition:enter.opacity.duration.3000ms
+                                    x-transition:leave.opacity.duration.500ms x-on:click="function(){
+                                        if(clicked) {
+                                            clearTimeout(timeoutPeppoAviao); showPeppoAviao = true; timeoutPeppoAviao = setTimeout(() => { showPeppoAviao = false }, 3500);
+                                        }
+                                        clicked = true; dialogeShow = true
+                                    }">
                             </div>
 
-                            <div class="font-bold text-gray-300 grow" :class="dialogeShow && 'opacity-0'">
-                                &lt;- (click me)
+                            <div class="flex-1 relative overflow-clip pe-6">
+                                <div class="font-bold text-gray-300 absolute top-1/3 right-1/2 text-nowrap"
+                                    :class="dialogeShow && 'opacity-0'">
+                                    &lt;- (click me)
+                                </div>
+
+                                <div class="bg-yellow-300 p-3 border border-yellow-500 w-full text-sm lg:text-base xl:text-lg"
+                                    :class="!dialogeShow && 'opacity-0'">
+                                    Oie, eu sou o copiloto do <strong><i>MeiaTimerInfinite-8</i></strong>. Estamos
+                                    voando agora e esse é o
+                                    momento
+                                    mais engraçado da viagem. <strong>Mande sua risadinha por <a
+                                            href="https://pixie.gg/meiaum"
+                                            class="text-blue-500 underline link text-wrap">aqui</a></strong> e vamos
+                                    decolar tão
+                                    alto como nunca visto antes! ehehe
+                                </div>
                             </div>
 
-                            <div x-show="dialogeShow" x-cloak
-                                class="bg-yellow-300 p-3 border border-yellow-500 w-48 absolute right-3 top-1 xl:w-56 xl:text-lg 2xl:right-24 lg:right-5 sm:right-6"
-                                x-on:click.away="dialogeShow = false">
-                                Oie, sou o copiloto do <strong><i>MeiaTimerInfinite-8</i></strong>. Queria agradecer
-                                pela
-                                preferência e confiaça em nossa companhia aérea. Espero que tenha uma boa viagem
-                                conosco!
-                            </div>
                         </div>
-
-                        <hr class="w-24 mx-auto mb-12">
 
                         <div class="flex justify-center items-center mb-6">
                             <div class="mx-auto w-48 text-center text-2xl font-bold">
                                 <p>Pousamos em:</p>
                                 <p id="pause">--:--</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center items-center px-3">
+                            <div class="mx-auto font-bold" x-data="{copied:false,timeout:null,clicked:false}">
+                                <div class="cursor-pointer bg-black text-white text-center mx-auto shadow-xl animate-pendule"
+                                    role="button">
+                                    <a href="https://pixie.gg/meiaum" class="px-2 underline">
+                                        Mande sua risadinha ehehe
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
