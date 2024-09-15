@@ -42,6 +42,21 @@
         <img src="./imagens/peppoaviao.webp" alt="" class="mx-auto scale-y-75 w-full">
     </div>
 
+    <!-- modal -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-50" x-data="{openModal: false}" x-cloak x-show="openModal"
+        x-on:openmodal.window="openModal=true">
+        <div class="w-full 2xl:w-1/4 sm:w-1/2 mx-auto flex justify-center items-center h-full">
+            <div class="bg-white w-full p-6" x-on:click.away="openModal=false">
+                <p class="text-center">
+                    As "risadinhas" são os pixs no <a href="https://pixie.gg/meiaum" class="text-blue-500 underline"
+                        target="_blank">pixie do MeiaUm</a>. O objetivo é, quando a regressiva acabar, é a hora que todo
+                    mundo se
+                    junta pra fazer um negócio engraçado, sabe
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="h-screen flex flex-col justify-between">
         <div class="grow flex items-center">
             <div class="w-full">
@@ -49,7 +64,7 @@
                     Air Pix Funny 61&trade;
                 </h1>
 
-                <div class="bg-white py-6 w-full  2xl:w-1/4 sm:w-1/2 mx-auto" x-data="{onCountdown: true}"
+                <div class="bg-white py-6 w-full 2xl:w-1/4 sm:w-1/2 mx-auto" x-data="{onCountdown: true}"
                     x-on:tooglecountdown.window="onCountdown = $event.detail.status;">
                     <div x-show="onCountdown" x-cloak>
 
@@ -72,7 +87,10 @@
                                 <div class="bg-yellow-300 p-3 border border-yellow-500 w-full text-sm lg:text-base xl:text-lg"
                                     :class="!dialogeShow && 'opacity-0'">
                                     E aí, sou o piloto do <strong><i>MeiaTimerInfinite-8</i></strong>. A dinâmica é
-                                    simples: durante o voo, <strong>quanto mais risadinha enviar, mais alto o nosso
+                                    simples: durante o voo, <strong class="cursor-pointer">quanto mais <u
+                                            x-on:click="$dispatch('openmodal')">risadinhas</u>
+                                        enviar, mais alto o
+                                        nosso
                                         avião sobe</strong>.
                                     Vamos
                                     juntos nessa viagem engraçada?
