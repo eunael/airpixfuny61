@@ -96,8 +96,8 @@
                         <div class="cursor-pointer bg-black text-white w-fit p-2 text-center mx-auto" x-on:click="function() {
                             clearTimeout(timeout); copied = true; timeout = setTimeout(() => { copied = false }, 2000);
                             navigator.clipboard.writeText('Ei, tá afim de fazer um voo engraçado? Venha voar na Air Pix Funny 61 TM e decole tão alto como nunca visto antes. Faltam menos de ' + document.getElementById('countdown').textContent + ' para o próximo voo. Para mais informações: ' + window.location.href)
-                        }">
-                            <span>Chame mais gente</span>
+                        }" role="button">
+                            Chame mais gente
                         </div>
                         <div class="w-full text-center mx-auto" x-cloak
                             x-show.transition.out.opacity.duration.1500ms="copied"
@@ -123,7 +123,7 @@
                     <div x-show="dialogeShow" x-cloak
                         class="bg-yellow-300 p-3 border border-yellow-500 w-48 absolute right-3 top-1 xl:w-56 xl:text-lg 2xl:right-24 lg:right-5 sm:right-6"
                         x-on:click.away="dialogeShow = false">
-                        Oi, eu sou co-piloto do <strong><i>MeiaTimerInfinite-8</i></strong>. Queria agradecer pela
+                        Oie, sou o copiloto do <strong><i>MeiaTimerInfinite-8</i></strong>. Queria agradecer pela
                         preferência e confiaça em nossa companhia aérea. Espero que tenha uma boa viagem conosco!
                     </div>
                 </div>
