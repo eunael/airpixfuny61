@@ -42,14 +42,14 @@
             Air Pix
             Funny 61&trade;</h1>
 
-        <div class="bg-white pt-12 pb-6 w-full lg:w-1/3 sm:w-1/2 mx-auto" x-data="{onCountdown: true}"
+        <div class="bg-white py-6 w-full lg:w-1/3 sm:w-1/2 mx-auto" x-data="{onCountdown: true}"
             x-on:tooglecountdown.window="onCountdown = $event.detail.status;">
             <div x-show="onCountdown" x-cloak>
 
-                <div class="relative flex justify-between items-center mb-6 px-3"
+                <div class="relative flex justify-between items-center mb-6 px-3 gap-3"
                     x-data="{clicked: false, dialogeShow: false}">
-                    <div class="grow flex sm:justify-center">
-                        <img src="./imagens/pilot.webp" alt="pilot" class="cursor-pointer me-3"
+                    <div class="grow flex justify-center">
+                        <img src="./imagens/pilot.webp" alt="pilot" class="cursor-pointer"
                             :class="clicked ? 'animate-pendule' : 'animate-bounce'"
                             x-on:click="clicked = true; dialogeShow = true">
                     </div>
@@ -66,8 +66,6 @@
                         ehehe
                     </div>
                 </div>
-
-                <hr class="w-24 mx-auto mb-6">
 
                 <div class="w-full mb-6">
                     <img src="./imagens/peppoaviao.webp" alt="" class="mx-auto scale-y-75 w-full">
@@ -112,7 +110,7 @@
             <div x-show="!onCountdown" x-cloak>
                 <div class="relative flex justify-between items-center mb-12 px-3"
                     x-data="{clicked: false, dialogeShow: false}">
-                    <div class="grow flex sm:justify-center">
+                    <div class="grow flex justify-center">
                         <img src="./imagens/sitpilot.webp" alt="pilot" class="cursor-pointer ms-3"
                             :class="clicked ? 'animate-pendule' : 'animate-bounce'"
                             x-on:click="clicked = true; dialogeShow = true">
