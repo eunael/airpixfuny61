@@ -1,6 +1,6 @@
 document.addEventListener('alpine:initialized', () => {
-    const targetHour = 20;
-    const targetMinute = 30;
+    const targetHour = 21;
+    const targetMinute = 0;
     const targetSecond = 0;
     const pauseDuration = 60 * 60 * 1000;
 
