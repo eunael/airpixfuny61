@@ -1,0 +1,14 @@
+<div class="flex justify-center items-center px-3">
+    <div class="mx-auto w-48 font-bold" x-data="{copied:false,timeout:null,clicked:false}">
+        <div class="cursor-pointer bg-black text-white w-fit p-2 text-center mx-auto shadow-xl"
+            :class="!clicked && 'animate-pendule'" x-on:click="function() {
+            clicked = true;
+        clearTimeout(timeout); copied = true; timeout = setTimeout(() => { copied = false }, 2000);
+        navigator.clipboard.writeText('Ei, tá afim de fazer um voo engraçado? Venha voar na Air Pix Funny 61 TM e decole tão alto como nunca visto antes. Faltam menos de ' + document.getElementById('countdown').textContent + ' para o próximo voo. Para mais informações: ' + window.location.href)
+    }" role="button">
+            Chame mais gente
+        </div>
+        <div class="w-full text-center mx-auto" x-cloak x-show.transition.out.opacity.duration.1500ms="copied"
+            x-transition:leave.opacity.duration.1500ms>Copiado.</div>
+    </div>
+</div>
